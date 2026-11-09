@@ -166,7 +166,7 @@ el("previewAllBtn").addEventListener("click", async () => {
     .map((r) =>
       r.error
         ? `<div class="entry error">${r.to || "(no recipient)"}: ${r.error}</div>`
-        : `<div class="entry"><strong>To:</strong> ${r.to}<br><strong>Subject:</strong> ${r.subject}</div>`
+        : `<div class="entry"><strong>To:</strong> ${r.to}<br><strong>Subject:</strong> ${r.subject}<br><strong>Body:</strong><br>${r.body.replace(/\n/g, "<br>")}</div>`
     )
     .join("");
 });
