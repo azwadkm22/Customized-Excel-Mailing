@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mailing Tool</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Mailing Tool</h1>
+  <p class="subtitle">Upload an Excel file, compose a templated email, then send.</p>
+
+  <section id="step-upload" class="card">
+    <h2>1. Upload Excel file</h2>
+    <input type="file" id="fileInput" accept=".xlsx">
+    <button id="uploadBtn">Upload</button>
+    <p id="uploadStatus" class="status"></p>
+  </section>
+
+  <section id="step-variables" class="card disabled">
+    <h2>2. Select variables</h2>
+    <p class="hint">Checked columns become insertable <code>{Variable}</code> buttons below.</p>
+    <div id="columnChecks" class="column-checks"></div>
+    <label class="field">
+      Recipient email column
+      <select id="emailColumnSelect"></select>
+    </label>
+  </section>
+
+  <section id="step-compose" class="card disabled">
+    <h2>3. Compose email</h2>
+
+    <label class="field">Subject</label>
+    <div id="subjectVarButtons" class="var-buttons"></div>
+    <input type="text" id="subjectInput" placeholder="Subject line">
+
+    <label class="field">Body</label>
+    <div id="bodyVarButtons" class="var-buttons"></div>
+    <textarea id="bodyInput" rows="10" placeholder="Email body"></textarea>
+
+    <div class="preview-controls">
+      <label class="field inline">
+        Preview row
+        <select id="previewRowSelect"></select>
+      </label>
+      <button id="previewBtn">Preview</button>
+    </div>
+    <div id="previewPanel" class="preview-panel"></div>
+  </section>
+
+  <section id="step-send" class="card disabled">
+    <h2>4. Sender &amp; send</h2>
+
+    <div class="grid">
+      <label class="field">SMTP host
+        <input type="text" id="smtpHost" value="smtp.gmail.com">
+      </label>
+      <label class="field">SMTP port
+        <input type="number" id="smtpPort" value="587">
+      </label>
+      <label class="field">Sender email
+        <input type="email" id="senderInput" placeholder="you@gmail.com">
+      </label>
+      <label class="field">App password
+        <input type="password" id="passwordInput" placeholder="App password (not stored)">
+      </label>
+      <label class="field">Delay between emails (s)
+        <input type="number" id="delayInput" value="0.5" step="0.1" min="0">
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="previewAllBtn">Preview All (Dry Run)</button>
+      <button id="sendBtn" class="danger">Send Emails</button>
+    </div>
+
+    <div id="previewAllPanel" class="preview-panel"></div>
+    <div id="sendLog" class="send-log"></div>
+  </section>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
